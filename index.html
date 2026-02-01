@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="flor.ico" type="image/x-icon" />
+    <title>Natalia Ferreira – Psicopedagoga</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <style>
+        /* CSS Reset & Variáveis */
+        :root {
+            --color-primary: #00ff4c;
+            /* Verde acolhedor */
+            --color-primary-dark: #00882d;
+            --color-text: #333333;
+            /* Cinza escuro para texto */
+            --color-headings: #2c4b37;
+            /* Verde mais escuro para títulos */
+            --color-white: #ffffff;
+            --container-bg: rgba(255, 255, 255, 0.97);
+            /* Fundo dos containers, levemente transparente */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--color-text);
+            line-height: 1.7;
+            /* --- IMAGEM DE FUNDO --- */
+            background-image: url('back.jpg');
+            /* <<< TROQUE ESTE LINK PELA SUA IMAGEM */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Efeito de fundo fixo */
+            background-repeat: repeat;
+            /* ou 'no-repeat' se a imagem for grande */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 60px 0;
+            /* Espaço entre as seções */
+            overflow: hidden;
+        }
+
+        /* --- ESTILO DO CONTAINER DE CONTEÚDO --- */
+        .content-wrapper {
+            background-color: var(--container-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-headings);
+            /* Alterado para usar a variável correta */
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 3.0rem;
+            margin-bottom: 60px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Animação de Fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header & Navegação --- */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            max-width: 1300px;
+            /* mais largo pra caber os links */
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            /* levemente menor */
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            white-space: nowrap;
+            /* impede quebrar o nome */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+            /* menos espaço entre links */
+            flex-wrap: nowrap;
+            /* ❌ nunca quebrar linha */
+            white-space: nowrap;
+            /* ❌ nunca quebrar texto */
+            overflow-x: auto;
+            /* se estourar, rola horizontal */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            /* um pouco menor pra caber tudo */
+        }
+
+        /* underline animado */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-primary-dark);
+        }
+
+        /* --- Botão Principal --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* --- Seção Home --- */
+        #home .home-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .home-image {
+            flex-basis: 40%;
+            text-align: center;
+        }
+
+        .perfil {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--color-white);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-text {
+            flex-basis: 60%;
+        }
+
+        .home-text h2 {
+            text-align: left;
+            font-size: 1.8rem;
+            line-height: 1.3;
+        }
+
+        .home-text h1 {
+            font-size: 3.5rem;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .home-text p {
+            font-size: 1.1rem;
+            max-width: 500px;
+        }
+
+        .home-text .btn {
+            margin-top: 20px;
+        }
+
+        /* --- Seção Sobre --- */
+        #sobre .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- Seção Modalidades --- */
+        #modalidades .content-wrapper {
+            background-color: transparent;
+            /* O container principal é transparente */
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .modalidades-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+        }
+
+        /* --- Seção Contato --- */
+        .contato-wrapper {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .contato-info,
+        .contato-form {
+            flex: 1;
+        }
+
+        .contato-info p {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contato-info i {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            width: 30px;
+            text-align: center;
+        }
+
+        .social-media {
+            margin-top: 30px;
+        }
+
+        .social-media a {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-media a:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            /* Borda mais suave */
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background-color: #f9f9f9;
+            /* Fundo sutil */
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background-color: #ffffff;
+        }
+
+        .response-message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--color-headings);
+            color: var(--color-white);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+            /* Espaço acima do rodapé */
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 992px) {
+            .content-wrapper {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 0;
+            }
+
+            .content-wrapper {
+                padding: 30px 25px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                /* Altura do header */
+                right: 0;
+                width: 100%;
+                background-color: var(--color-white);
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+                border-top: 1px solid #f0f0f0;
+                /* Divisor sutil */
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #home .home-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .home-text {
+                order: 2;
+            }
+
+            .home-image {
+                order: 1;
+                margin-bottom: 30px;
+            }
+
+            .home-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .home-text h2 {
+                text-align: center;
+            }
+
+            .perfil {
+                width: 220px;
+                height: 220px;
+            }
+
+            .contato-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Natalia Ferreira</div>
+            <button class="menu-toggle">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Início</a></li>
+
+                <li><a href="#publico">Para quem é</a></li>
+                <li><a href="#como-funciona">Como funciona</a></li>
+
+                <li><a href="#psicopedagogia">Psicopedagogia</a></li>
+                <li><a href="#deficiencia-intelectual">Deficiência Intelectual</a></li>
+                <li><a href="#psicomotricidade">Psicomotricidade</a></li>
+
+                <li><a href="#modalidades">Modalidades</a></li>
+                <li><a href="#missao">Missão</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper home-content">
+                    <div class="home-image">
+                        <img src="naty.jpeg" alt="Natalia Ferreira" class="perfil" />
+                    </div>
+                    <div class="home-text">
+                        <h2>Apoiando jornadas de <br />aprendizagem com afeto e técnica.</h2>
+                        <h1>Natalia Ferreira</h1>
+                        <p><strong>Psicopedagoga</strong> - ABPp 1651/SP</p>
+                        <p>Sou graduada em Pedagogia, com especialização em Deficiência Intelectual, Psicomotricidade e
+                            Psicopedagogia Clínica e Institucional, com
+                            ênfase em pessoas especiais e deficiências invisíveis.</p>
+                        <a href="https://wa.me/5517996683946?text=Ol%C3%A1%2C+tudo+bem%3F+Gostaria+de+saber+sobre+o+seu+trabalho+como+psicopedagoga"
+                            target="_blank" class="btn">
+                            Agendar Consulta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="publico" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper">
+                    <h2>Para quem é o atendimento?</h2>
+                    <p>
+                        O acompanhamento psicopedagógico é indicado para pessoas que enfrentam desafios no processo de
+                        aprendizagem ou desenvolvimento, respeitando sempre a individualidade e o tempo de cada um.
+                    </p>
+                    <ul style="margin-top: 25px; line-height: 2;">
+                        <li> Crianças com dificuldades de aprendizagem</li>
+                        <li> Pessoas com Deficiência Intelectual</li>
+                        <li> Transtornos do Neurodesenvolvimento</li>
+                        <li> Dificuldades de atenção, memória e concentração</li>
+                        <li> Jovens e adultos com histórico de dificuldades escolares</li>
+                        <li> Famílias que buscam orientação e apoio no processo educacional</li>
+                        <li> Proporciono aulas de reforço</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="como-funciona" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper">
+                    <h2>Como funciona o atendimento?</h2>
+
+                    <p><strong>1. Avaliação inicial</strong><br>
+                        Realizo uma escuta cuidadosa para compreender a história, as dificuldades e as necessidades
+                        específicas de cada pessoa.</p>
+
+                    <p><strong>2. Planejamento individualizado</strong><br>
+                        A partir da avaliação, é elaborado um plano de intervenção personalizado, respeitando o ritmo e
+                        as potencialidades do atendido.</p>
+
+                    <p><strong>3. Intervenção psicopedagógica</strong><br>
+                        Os atendimentos são realizados de forma acolhedora, utilizando estratégias lúdicas, pedagógicas
+                        e terapêuticas.</p>
+
+                    <p><strong>4. Acompanhamento contínuo</strong><br>
+                        O processo é acompanhado de forma constante, com ajustes sempre que necessário.</p>
+
+                    <p><strong>5. Devolutiva à família</strong><br>
+                        A família participa do processo, recebendo orientações e feedbacks para fortalecer os avanços
+                        fora do atendimento.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="psicopedagogia" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper">
+                    <h2>Por que Psicopedagogia?</h2>
+                    <p>
+                        A Psicopedagogia me escolheu tanto quanto eu a escolhi. Encontrei nela um espaço onde o
+                        acolhimento, a escuta e a sensibilidade caminham lado a lado com o conhecimento e a técnica. É
+                        uma ciência do afeto, que enxerga o ser humano por inteiro.
+                    </p>
+                    <p>
+                        Ser psicopedagoga é mais do que ajudar alguém a aprender. É compreender as dores por trás de um
+                        silêncio, uma resistência, um erro repetido. É celebrar cada conquista com o mesmo entusiasmo de
+                        uma grande vitória. É estar presente com empatia e respeito em cada passo do processo.
+                    </p>
+                    <p>
+                        Eu escolhi a Psicopedagogia porque acredito na força da transformação através da educação e que
+                        todo mundo pode aprender, desde que seja compreendido em sua essência.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="deficiencia-intelectual" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper">
+                    <h2>Por que Deficiência Intelectual?</h2>
+                    <p>
+                    Eu escolhi a Deficiência Intelectual porque acredito profundamente que todo ser humano aprende, se desenvolve e se expressa, 
+                    cada um a seu modo e no seu tempo. Ao longo da minha trajetória, compreendi que olhar apenas para as dificuldades não é suficiente: 
+                    é preciso enxergar o sujeito por inteiro, com sua história, emoções, corpo e potencialidades.</p>
+                        <p>
+                    Trabalhar com a Deficiência Intelectual me ensinou a ir além dos rótulos e dos limites impostos socialmente.
+                    Aprendi a reconhecer capacidades onde muitos veem apenas dificuldades, e a valorizar cada pequeno avanço como uma grande conquista..</p>
+                    <p>
+                   Escolher essa área é escolher acreditar no desenvolvimento,
+                    no respeito ao ritmo de cada pessoa e na potência que existe em cada ser humano quando é acolhido, 
+                    compreendido e acompanhado com sensibilidade e presença..</p>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="psicomotricidade" class="section">
+            <div class="container fade-in">
+                <div class="content-wrapper">
+                    <h2>Por que Psicomotricidade?</h2>
+                    <p>
+                    Eu escolhi a Psicomotricidade porque entendi que o aprender também acontece pelo corpo. 
+                    O movimento, o gesto, o ritmo e a forma de se expressar dizem muito sobre como cada pessoa se 
+                    relaciona consigo mesma, com o outro e com o mundo.</p>
+                        <p>
+                    Ao longo da minha trajetória, percebi que muitas dificuldades de aprendizagem carregam, por trás, desafios emocionais, corporais e relacionais. 
+                    A Psicomotricidade me ensinou a olhar para esses sinais com mais sensibilidade, a escutar o que o corpo comunica quando as palavras não dão conta.</p>
+                    <p>
+                   Escolher a Psicomotricidade é escolher trabalhar com a integralidade do ser humano. 
+                   É acreditar que o desenvolvimento acontece quando corpo, emoção e cognição caminham juntos, 
+                   respeitando o tempo, o ritmo e a singularidade de cada pessoa.</p>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <section id="modalidades" class="section">
+        <div class="container fade-in">
+            <div class="content-wrapper">
+                <h2>Modalidades de Atendimento</h2>
+                <div class="modalidades-wrapper">
+                    <div class="card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Atendimento Presencial</h3>
+                        <p>Atendimento especializado em formato homecare na cidade de Cosmorama/SP, e também em
+                            Votuporanga-SP, oferecendo conforto e personalização.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="missao" class="section">
+        <div class="container fade-in">
+            <div class="content-wrapper" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2>Minha missão</h2>
+                <p style="font-size: 1.2rem;">
+                    Minha missão é olhar para cada pessoa além do diagnóstico, reconhecendo sua história, seus
+                    sentimentos e suas potencialidades.
+                </p>
+                <p style="font-size: 1.2rem;">
+                    Acredito que aprender é um processo possível para todos, quando existe acolhimento, respeito e
+                    um olhar sensível para o ser humano em sua totalidade.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="faq" class="section">
+        <div class="container fade-in">
+            <div class="content-wrapper">
+                <h2>Perguntas Frequentes</h2>
+
+                <p><strong>O atendimento é somente para crianças?</strong><br>
+                    Não. O acompanhamento pode ser realizado com crianças, adolescentes, jovens e adultos.</p>
+
+                <p><strong>Quantas sessões por semana são indicadas?</strong><br>
+                    A frequência é definida após a avaliação inicial, de acordo com as necessidades de cada caso.
+                </p>
+
+                <p><strong>O atendimento substitui acompanhamento escolar?</strong><br>
+                    Não. Ele complementa o processo educacional, auxiliando no desenvolvimento das habilidades de
+                    aprendizagem.</p>
+
+                <p><strong>Atende convênios?</strong><br>
+                    O atendimento é particular. Em alguns casos, é possível emitir recibo para reembolso.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section">
+        <div class="container fade-in">
+            <div class="content-wrapper">
+                <h2>Entre em Contato</h2>
+                <div class="contato-wrapper">
+                    <div class="contato-info">
+                        <h3>Vamos conversar?</h3>
+                        <p>Sinta-se à vontade para me contatar por qualquer um dos canais abaixo. Estou aqui para
+                            ajudar!</p>
+                        <p><i class="fas fa-phone"></i> (17) 99668-3946</p>
+                        <p><i class="fas fa-envelope"></i> ferreiranatalia082@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Avenida Vitório Luvizari, 1493 – Cosmorama/SP</p>
+                        <div class="social-media">
+                            <a href="https://www.instagram.com/nataliaferreira_psicopedagoga" target="_blank"
+                                aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://wa.me/5517996683946?text=Ol%C3%A1%2C+tudo+bem%3F+Gostaria+de+saber+mais+sobre+seu+trabalho."
+                                target="_blank" aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contato-form">
+                        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
+                            <input type="hidden" name="access_key" value="Chave aqui">
+
+                            <div class="form-group">
+                                <label for="name">Nome:</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensagem:</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn">Enviar Mensagem</button>
+                            <div id="responseMessage" class="response-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>© 2025 – Serviços Kiyomura – Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Animação Fade-in ao rolar a página
+            const fadeElems = document.querySelectorAll('.fade-in');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            fadeElems.forEach(elem => observer.observe(elem));
+
+            // Menu Hambúrguer para mobile
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => navLinks.classList.remove('active'));
+            });
+
+            // Marcar link de navegação ativo conforme a rolagem
+            const sections = document.querySelectorAll('.section');
+            const navLinksA = document.querySelectorAll('.nav-links a');
+            window.addEventListener('scroll', () => {
+                let current = 'home';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinksA.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href').includes(current)) a.classList.add('active');
+                });
+            });
+
+            // Lógica de envio do formulário de contato
+            const contactForm = document.getElementById('contactForm');
+            const responseMessage = document.getElementById('responseMessage');
+
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(contactForm);
+                const object = {};
+                formData.forEach((value, key) => {
+                    object[key] = value;
+                });
+                const json = JSON.stringify(object);
+
+                responseMessage.innerHTML = "Enviando...";
+                responseMessage.style.color = 'gray';
+
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                    .then(async (response) => {
+                        let jsonResponse = await response.json();
+                        if (response.status == 200) {
+                            responseMessage.textContent = 'Obrigado pelo seu contato! Mensagem enviada com sucesso.';
+                            responseMessage.style.color = 'var(--color-primary-dark)';
+                        } else {
+                            console.log(response);
+                            responseMessage.textContent = jsonResponse.message;
+                            responseMessage.style.color = 'red';
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        responseMessage.textContent = "Algo deu errado. Tente novamente mais tarde.";
+                        responseMessage.style.color = 'red';
+                    })
+                    .then(function () {
+                        contactForm.reset();
+                        setTimeout(() => {
+                            responseMessage.textContent = '';
+                        }, 5000);
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
